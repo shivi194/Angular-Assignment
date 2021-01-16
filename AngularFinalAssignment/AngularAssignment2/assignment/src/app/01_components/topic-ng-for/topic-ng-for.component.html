@@ -1,0 +1,31 @@
+<h3 id="heading" *ngIf="name">{{ name }} has been viewed.</h3>
+<br/><br/>
+<div class="columns" *ngIf="users.length > 0; else noUsers">
+  <!-- index, first, last, even, odd -->
+  <app-user-card
+    *ngFor="
+      let u of users;
+      index as i;
+      first as isFirst;
+      last as isLast;
+      even as isEven;
+      odd as isOdd
+    "
+    [user]="u"
+    [userIndex]="i"
+    [isFirst]="isFirst"
+    [isLast]="isLast"
+    [isEven]="isEven"
+    [isOdd]="isOdd"
+    (userViewed)="handleUserViewed($event)"
+    (userDeleted)="handleUserDeleted($event)"
+  ></app-user-card>
+</div>
+
+<ng-template #noUsers>
+  <div class="columns">
+    <div class="column">
+      <p id="nou" class="no-users tag">No Users Available.</p>
+    </div>
+  </div>
+</ng-template>
